@@ -19,6 +19,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 100%;
+  padding: 0 40px;
 }
 
 .navbar__brand img {
@@ -61,6 +63,20 @@
   width: 100%;
 }
 
+/* empurra os links e o seletor para a direita (desktop) */
+.navbar__nav {
+  margin-left: auto;
+}
+
+.navbar__lang-desktop {
+  display: inline-flex;
+  margin-left: 28px;
+}
+
+.navbar__lang-mobile {
+  display: none;
+}
+
 /* Hambúrguer */
 .navbar__toggle {
   display: none;
@@ -99,11 +115,16 @@
     display: flex;
   }
 
+  .navbar__lang-desktop {
+    display: none;
+  }
+
   .navbar__nav {
     position: fixed;
     inset: 0;
     background: rgba(8, 8, 8, 0.98);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     transform: translateX(100%);
@@ -122,5 +143,10 @@
 
   .navbar__nav a {
     font-size: 1.4rem;
+  }
+
+  .navbar__lang-mobile {
+    display: block;
+    margin-top: 44px;
   }
 }

@@ -4,11 +4,15 @@ import emailCircle from '../assets/email-circle.png'
 import whatsappIcon from '../assets/whatsapp.png'
 import telegramIcon from '../assets/telegram.png'
 import useReveal from '../hooks/useReveal.js'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 import '../styles/Contact.css'
 
 const INITIAL = { nome: '', telefone: '', email: '', mensagem: '' }
 
 export default function Contact() {
+  const { t } = useLanguage()
+  const tf = t.contact.form
+
   const [form, setForm] = useState(INITIAL)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState(null) // 'sending' | 'success' | 'error'
@@ -16,21 +20,21 @@ export default function Contact() {
 
   const validate = (values) => {
     const e = {}
-    if (!values.nome.trim()) e.nome = 'Informe seu nome.'
+    if (!values.nome.trim()) e.nome = tf.errName
     if (!values.telefone.trim()) {
-      e.telefone = 'Informe seu telefone.'
+      e.telefone = tf.errPhoneReq
     } else if (!/^[+\d().\s-]{8,20}$/.test(values.telefone.trim())) {
-      e.telefone = 'Telefone inválido.'
+      e.telefone = tf.errPhoneInvalid
     }
     if (!values.email.trim()) {
-      e.email = 'Informe seu e-mail.'
+      e.email = tf.errEmailReq
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
-      e.email = 'E-mail inválido.'
+      e.email = tf.errEmailInvalid
     }
     if (!values.mensagem.trim()) {
-      e.mensagem = 'Escreva uma mensagem.'
+      e.mensagem = tf.errMsgReq
     } else if (values.mensagem.trim().length < 10) {
-      e.mensagem = 'A mensagem deve ter ao menos 10 caracteres.'
+      e.mensagem = tf.errMsgShort
     }
     return e
   }
@@ -76,7 +80,7 @@ export default function Contact() {
       <div ref={ref} className={`container contact__grid reveal ${visible ? 'is-visible' : ''}`}>
         {/* Informações */}
         <div className="contact__info">
-          <h2 className="contact__heading">Contato</h2>
+          <h2 className="contact__heading">{t.contact.title}</h2>
 
           <div className="contact__icon-circle">
             <img src={emailCircle} alt="" />
@@ -97,10 +101,20 @@ export default function Contact() {
               <a href="tel:+48732099369">+48 732 099 369</a>
             </li>
             <li>
-              <img src={emailIcon} alt="E-mail" />
-              <a href="mailto:contact@hafenconsolidators.com">
-                contact@hafenconsolidators.com
+              <img src={whatsappIcon} alt="WhatsApp Brasil" />
+              <a href="tel:+555130274785">
+                <span className="contact__country">{t.contact.brazil}</span>+55 51 3027 4785
               </a>
+            </li>
+            <li>
+              <img src={whatsappIcon} alt="WhatsApp Brasil" />
+              <a href="tel:+554520210022">
+                <span className="contact__country">{t.contact.brazil}</span>+55 45 2021 0022
+              </a>
+            </li>
+            <li>
+              <img src={emailIcon} alt="E-mail" />
+              <a href="mailto:hr@hafenconsolidators.com">hr@hafenconsolidators.com</a>
             </li>
           </ul>
         </div>
@@ -112,7 +126,7 @@ export default function Contact() {
               <input
                 type="text"
                 name="nome"
-                placeholder="Nome"
+                placeholder={tf.name}
                 value={form.nome}
                 onChange={handleChange}
                 aria-invalid={!!errors.nome}
@@ -124,7 +138,7 @@ export default function Contact() {
               <input
                 type="tel"
                 name="telefone"
-                placeholder="Telefone"
+                placeholder={tf.phone}
                 value={form.telefone}
                 onChange={handleChange}
                 aria-invalid={!!errors.telefone}
@@ -137,7 +151,7 @@ export default function Contact() {
             <input
               type="email"
               name="email"
-              placeholder="E-mail"
+              placeholder={tf.email}
               value={form.email}
               onChange={handleChange}
               aria-invalid={!!errors.email}
@@ -148,7 +162,7 @@ export default function Contact() {
           <div className="contact__field">
             <textarea
               name="mensagem"
-              placeholder="Mensagem"
+              placeholder={tf.message}
               rows="5"
               value={form.mensagem}
               onChange={handleChange}
@@ -158,18 +172,14 @@ export default function Contact() {
           </div>
 
           <button type="submit" className="contact__submit" disabled={status === 'sending'}>
-            {status === 'sending' ? 'Enviando...' : 'Enviar'}
+            {status === 'sending' ? tf.sending : tf.send}
           </button>
 
           {status === 'success' && (
-            <p className="contact__feedback contact__feedback--ok">
-              Mensagem enviada com sucesso. Em breve entraremos em contato.
-            </p>
+            <p className="contact__feedback contact__feedback--ok">{tf.success}</p>
           )}
           {status === 'error' && (
-            <p className="contact__feedback contact__feedback--err">
-              Não foi possível enviar. Tente novamente em instantes.
-            </p>
+            <p className="contact__feedback contact__feedback--err">{tf.error}</p>
           )}
         </form>
       </div>

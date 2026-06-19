@@ -1,7 +1,10 @@
 import globe from '../assets/globe.png'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 import '../styles/Hero.css'
 
 export default function Hero() {
+  const { t } = useLanguage()
+
   const go = (e, id) => {
     e.preventDefault()
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -15,14 +18,10 @@ export default function Hero() {
       </div>
 
       <div className="hero__content container">
-        <h1 className="hero__title gold-text">Liderança Global, conexões fortes</h1>
-        <p className="hero__subtitle">
-          O grupo Hafen impulsiona o comércio mundial através de suas subsidiárias
-          especialistas. São 22 anos de história, conexão, conversão e segurança com
-          logística portuária.
-        </p>
+        <h1 className="hero__title gold-text">{t.hero.title}</h1>
+        <p className="hero__subtitle">{t.hero.subtitle}</p>
         <a href="#estrutura" className="hero__cta" onClick={(e) => go(e, 'estrutura')}>
-          Nossa História
+          {t.hero.cta}
         </a>
       </div>
     </section>

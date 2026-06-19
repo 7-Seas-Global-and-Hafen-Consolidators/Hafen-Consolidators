@@ -1,7 +1,10 @@
 import globeIcon from '../assets/globe-icon.png'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 import '../styles/Footer.css'
 
 export default function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer className="footer">
       <div className="container">
@@ -31,9 +34,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="footer__copy">
-          © 2026 Hafen Consolidators Group. Todos os direitos reservados.
-        </p>
+        <p className="footer__copy">{t.footer.copyright}</p>
       </div>
     </footer>
   )

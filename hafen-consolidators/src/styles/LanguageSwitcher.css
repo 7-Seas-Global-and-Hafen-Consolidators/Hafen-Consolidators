@@ -1,0 +1,28 @@
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-switch__btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  padding: 4px 4px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.lang-switch__btn:hover {
+  color: var(--gold-bright);
+}
+
+.lang-switch__btn.is-active {
+  color: var(--gold-bright);
+  font-weight: 700;
+}

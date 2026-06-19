@@ -2,21 +2,23 @@ import hafenLogo from '../assets/hafen-logo.png'
 import sevenSeas from '../assets/sevenseas-logo.png'
 import guiropa from '../assets/guiropa-logo.png'
 import useReveal from '../hooks/useReveal.js'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 import '../styles/Structure.css'
 
 export default function Structure() {
+  const { t } = useLanguage()
   const [ref, visible] = useReveal()
 
   return (
     <section className="structure section" id="estrutura">
       <div className="container">
-        <h2 className="section-title">Nossa Estrutura</h2>
+        <h2 className="section-title">{t.structure.title}</h2>
 
         <div ref={ref} className={`structure__tree reveal ${visible ? 'is-visible' : ''}`}>
           {/* Empresa mãe */}
           <article className="structure__card structure__parent">
             <span className="structure__label">
-              Empresa <span className="gold-text">Mãe</span>
+              {t.structure.parent} <span className="gold-text">{t.structure.parentHighlight}</span>
             </span>
             <img
               src={hafenLogo}
@@ -33,7 +35,7 @@ export default function Structure() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="structure__label">Subsidiária</span>
+              <span className="structure__label">{t.structure.subsidiary}</span>
               <img src={sevenSeas} alt="7 Seas Global" className="structure__logo" />
             </a>
 
@@ -49,7 +51,7 @@ export default function Structure() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="structure__label">Subsidiária</span>
+              <span className="structure__label">{t.structure.subsidiary}</span>
               <img src={guiropa} alt="Guiropa Systems" className="structure__logo" />
             </a>
           </div>

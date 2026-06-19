@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 import hafenLogo from '../assets/hafen-logo.png'
+import LanguageSwitcher from './LanguageSwitcher.jsx'
+import { useLanguage } from '../i18n/LanguageContext.jsx'
 import '../styles/Navbar.css'
 
-const LINKS = [
-  { id: 'sobre', label: 'Sobre Nós' },
-  { id: 'estrutura', label: 'Nossa Estrutura' },
-  { id: 'servicos', label: 'Serviços' },
-  { id: 'contato', label: 'Contato' }
-]
-
 export default function Navbar() {
+  const { t } = useLanguage()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const LINKS = [
+    { id: 'sobre', label: t.nav.about },
+    { id: 'estrutura', label: t.nav.structure },
+    { id: 'servicos', label: t.nav.services },
+    { id: 'contato', label: t.nav.contact }
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -43,7 +46,16 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+          {/* Seletor de idioma dentro do menu (aparece no mobile) */}
+          <div className="navbar__lang-mobile">
+            <LanguageSwitcher />
+          </div>
         </nav>
+
+        {/* Seletor de idioma no topo (aparece no desktop) */}
+        <div className="navbar__lang-desktop">
+          <LanguageSwitcher />
+        </div>
 
         <button
           className={`navbar__toggle ${open ? 'is-open' : ''}`}
