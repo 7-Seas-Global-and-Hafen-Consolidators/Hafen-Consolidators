@@ -1,0 +1,139 @@
+.structure {
+  background: var(--bg-dark);
+}
+
+.structure__tree {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.structure__card {
+  background: var(--card-dark);
+  border: 1px solid var(--border-gold);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.structure__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--text-white);
+  letter-spacing: 0.3px;
+}
+
+/* Empresa mãe */
+.structure__parent {
+  position: relative;
+  z-index: 2;
+  width: min(520px, 100%);
+  padding: 26px 30px 34px;
+}
+
+.structure__logo {
+  width: auto;
+  object-fit: contain;
+}
+
+.structure__logo--parent {
+  max-height: 110px;
+  max-width: 82%;
+}
+
+/* Parte inferior em 3 colunas: card | conector | card */
+.structure__lower {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  width: 100%;
+  max-width: 960px;
+}
+
+.structure__sub {
+  width: 100%;
+  max-width: 360px;
+  padding: 22px 20px 28px;
+  cursor: pointer;
+  justify-self: center;
+}
+
+.structure__sub .structure__logo {
+  max-height: 200px;
+  max-width: 80%;
+}
+
+.structure__card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-bright);
+  box-shadow: 0 16px 40px rgba(160, 108, 32, 0.22);
+}
+
+/* ---- Conector central com setas douradas ---- */
+.structure__connector {
+  position: relative;
+  width: clamp(110px, 16vw, 220px);
+  height: 2px;
+  background: var(--gold);
+  margin-top: 130px; /* posiciona a barra na altura dos cards */
+  align-self: start;
+}
+
+/* linha vertical que sobe da barra até a empresa mãe */
+.structure__connector::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 130px;
+  background: var(--gold);
+}
+
+/* setas nas pontas apontando para os cards */
+.structure__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+.structure__arrow--left {
+  left: -2px;
+  border-right: 12px solid var(--gold); /* aponta para a esquerda */
+}
+
+.structure__arrow--right {
+  right: -2px;
+  border-left: 12px solid var(--gold); /* aponta para a direita */
+}
+
+/* ---- Responsivo ---- */
+@media (max-width: 760px) {
+  .structure__lower {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 28px;
+    margin-top: 36px;
+  }
+  .structure__connector {
+    display: none;
+  }
+  .structure__sub {
+    max-width: 340px;
+  }
+  .structure__sub .structure__logo {
+    max-height: 180px;
+  }
+}

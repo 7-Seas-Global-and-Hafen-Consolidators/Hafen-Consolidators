@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   Hafen Consolidators — Design Tokens
+   ============================================================ */
+:root {
+  /* Cores */
+  --bg-black: #0a0a0a;
+  --bg-dark: #1b1b1b;
+  --bg-dark-2: #161616;
+  --bg-light: #d9d9d9;
+  --card-dark: #121212;
+
+  --gold: #a06c20;
+  --gold-soft: #b88431;
+  --gold-bright: #e0b34a;
+
+  --text-white: #f4f4f4;
+  --text-muted: #b5b5b5;
+  --text-dark: #1a1a1a;
+  --border-gold: rgba(160, 108, 32, 0.55);
+  --border-soft: rgba(255, 255, 255, 0.12);
+
+  /* Tipografia */
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Layout */
+  --maxw: 1180px;
+  --nav-h: 76px;
+  --radius: 14px;
+
+  /* Gradiente dourado da marca */
+  --gold-gradient: linear-gradient(100deg, #c89236 0%, #e6c065 45%, #a86d1e 100%);
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Acessibilidade — foco visível */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Utilitários
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 88px 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  text-align: center;
+  margin-bottom: 56px;
+  letter-spacing: 0.5px;
+}
+
+.gold-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animação de entrada ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
